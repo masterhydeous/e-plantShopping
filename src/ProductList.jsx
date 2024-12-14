@@ -9,6 +9,8 @@ function ProductList() {
     const [addedToCart, setAddedToCart] = useState({});
     const summary = useSelector((state) => state.cart.summary);
     const dispatch = useDispatch();
+    const cart = useSelector(state => state.cart.items);
+
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -256,6 +258,10 @@ function ProductList() {
             [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
         }));
     };
+    useEffect(() => {
+        dispatch(updateCartSummary());
+      }, [addedToCart,cart, dispatch]);
+
     return (
         <div>
             <div className="navbar" style={styleObj}>
